@@ -10,13 +10,13 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background: #f7f7f7;
+  background-color: var(--cor-principal);
 }
 
 .container {
   width: 100%;
   max-width: 400px;
-  background: white;
+  background-color: var(--cor-secundaria);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -48,7 +48,7 @@ button {
   font-size: 16px;
   border: none;
   border-radius: 4px;
-  background: #007bff;
+  background-color: var(--cor-escura);
   color: white;
   cursor: pointer;
 }
@@ -77,6 +77,7 @@ button:disabled {
 
 .resultado {
   text-align: center;
+  font-weight: bold;
   font-size: 18px;
   margin-bottom: 16px;
 }
@@ -101,4 +102,5 @@ button:disabled {
   padding: 6px;
   border-bottom: 1px solid #eee;
   font-size: 14px;
+  font-weight: bold;
 }
