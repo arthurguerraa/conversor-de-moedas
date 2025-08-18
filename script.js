@@ -6,6 +6,36 @@
         const spinner = document.getElementById('spinner');
         const exibicaoResultado = document.getElementById('resultado');
         const listaHistorico = document.getElementById('lista-historico');
+        const botaoModo = document.getElementById('botao-modo');
+        const MODO_KEY = 'conversor_modo_escuro';
+
+        function aplicarModo(ativado) {
+        if (ativado) {
+            document.body.classList.add('dark-mode');
+            botaoModo.textContent = '☀️'; // mostra sol quando modo escuro ativo (para indicar "voltar")
+            botaoModo.setAttribute('aria-pressed', 'true');
+            botaoModo.title = 'Desativar modo escuro';
+        }else {
+            document.body.classList.remove('dark-mode');
+            botaoModo.textContent = '🌙'; // lua quando modo claro
+            botaoModo.setAttribute('aria-pressed', 'false');
+            botaoModo.title = 'Ativar modo escuro';
+        }
+        }
+
+        botaoModo.addEventListener('click', () => {
+        const ativo = document.body.classList.toggle('dark-mode');
+        aplicarModo(ativo);
+        localStorage.setItem(MODO_KEY, ativo ? 'true' : 'false');
+        });
+
+        // Aplica preferencia salva ao carregar a página
+        (function initModo() {
+        const pref = localStorage.getItem(MODO_KEY);
+        const ativo = pref === 'true';
+        aplicarModo(ativo);
+        })();
+
 
         // Estado
         let historicoConversoes = [];
