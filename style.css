@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 :root{
   --cor-principal: #C9E4CA;
   --cor-secundaria: #87BBA2;
@@ -5,7 +7,7 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -100,7 +102,7 @@ button:disabled {
 
 .historico li {
   padding: 6px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--cor-principal);
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 400;
 }
