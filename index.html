@@ -1,43 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="shortcut icon" href="imagens/favicon.png" type="image/x-icon">
-    <title>Conversor de Moedas</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style/style.css">
+  <link rel="shortcut icon" href="imagens/favicon.png" type="image/x-icon">
+  <title>Conversor de Moedas</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Conversor de Moedas</h1>
-        <button id="botao-modo" class="botao-modo" aria-label="Alternar modo escuro" title="Modo escuro">🌙</button>
-        <div class="campo">
-            <input type="number" id="campo-valor" placeholder="Valor a converter" />
-            <select id="seletor-origem">
-                <option value="USD">Dólar (USD)</option>
-                <option value="EUR">Euro (EUR)</option>
-                <option value="BRL">Real (BRL)</option>
-                <option value="GBP">Libra (GBP)</option>
-                <option value="CAD">Dólar Canadense (CAD)</option>
-            </select>
-            <select id="seletor-destino">
-                <option value="BRL">Real (BRL)</option>
-                <option value="USD">Dólar (USD)</option>
-                <option value="EUR">Euro (EUR)</option>
-                <option value="GBP">Libra (GBP)</option>
-                <option value="CAD">Dólar Canadense (CAD)</option>
-            </select>
-        </div>
-        <div class="acoes">
-            <button id="botao-converter">Converter</button>
-            <div class="spinner" id="spinner"></div>
-        </div>
-        <div class="resultado" id="resultado"></div>
-        <div class="historico">
-            <h2>Últimas conversões</h2>
-            <ul id="lista-historico"></ul>
-        </div>
+  <div class="container">
+    <h1>Conversor de Moedas</h1>
+    <button id="botao-modo" class="botao-modo" aria-label="Alternar modo escuro" title="Modo escuro">🌙</button>
+
+    <div class="campo">
+      <input type="number" id="campo-valor" placeholder="Valor a converter" />
+
+      <div class="selects-row">
+        <select id="seletor-origem">
+          <option value="USD">Dólar (USD)</option>
+          <option value="EUR">Euro (EUR)</option>
+          <option value="BRL">Real (BRL)</option>
+          <option value="GBP">Libra (GBP)</option>
+          <option value="CAD">Dólar Canadense (CAD)</option>
+        </select>
+
+        <button id="swap-btn" class="swap-btn" aria-label="Trocar moedas" title="Trocar">⇄</button>
+
+        <select id="seletor-destino">
+          <option value="BRL">Real (BRL)</option>
+          <option value="USD">Dólar (USD)</option>
+          <option value="EUR">Euro (EUR)</option>
+          <option value="GBP">Libra (GBP)</option>
+          <option value="CAD">Dólar Canadense (CAD)</option>
+        </select>
+      </div>
     </div>
-    <script src="script.js"></script>
+
+    <div class="acoes">
+      <button id="botao-converter">Converter</button>
+      <div class="spinner" id="spinner"></div>
+    </div>
+
+    <!-- resultado agora tem um span para o texto e um botão de copiar separado -->
+    <div class="resultado" id="resultado" aria-live="polite">
+      <span id="resultado-text"></span>
+      <button id="copy-btn" class="copy-btn" title="Copiar resultado" aria-label="Copiar resultado" disabled>📋</button>
+    </div>
+
+    <div class="historico">
+      <h2>Últimas conversões</h2>
+      <ul id="lista-historico"></ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
