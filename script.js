@@ -58,7 +58,9 @@ function atualizarHistorico() {
   listaHistorico.innerHTML = '';
   historicoConversoes.slice(-5).reverse().forEach(item => {
     const li = document.createElement('li');
-    li.textContent = `${item.valor.toFixed(2)} ${item.origem} ➔ ${item.resultado.toFixed(2)} ${item.destino}`;
+    const fO = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: item.origem });
+    const fD = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: item.destino });
+    li.textContent = `${fO.format(item.valor)} ➔ ${fD.format(item.resultado)}`;
     listaHistorico.appendChild(li);
   });
 }
@@ -122,20 +124,24 @@ async function converter() {
     const taxa = dados.rates[destino];
 
     if (typeof taxa !== 'number') {
-      alert('Taxa de câmbio não encontrada para esse par.');
+      mostrarToast('Taxa de câmbio não encontrada para esse par.');
       return;
     }
 
     const resultado = valor * taxa;
 
-    exibicaoResultadoText.textContent = `${valor.toFixed(2)} ${origem} = ${resultado.toFixed(2)} ${destino}`;
+    const formatadorOrigem = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: origem });
+    const formatadorDestino = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: destino });
+
+    exibicaoResultadoText.textContent = `${formatadorOrigem.format(valor)} = ${formatadorDestino.format(resultado)}`;
+
 
     // Atualiza histórico
     historicoConversoes.push({ valor, origem, destino, resultado });
     salvarHistorico();
     atualizarHistorico();
   } catch (erro) {
-    alert('Erro ao buscar taxas. Tente novamente mais tarde.');
+    mostrarToast('Erro ao buscar taxas. Tente novamente mais tarde.');
     console.error(erro);
   } finally {
     fimCarregamento();
