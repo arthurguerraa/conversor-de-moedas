@@ -88,18 +88,28 @@ function atualizarEstadoBotoes() {
   copyBtn.disabled = !temResultado;
 }
 
+function mostrarToast(mensagem) {
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = mensagem;
+  container.appendChild(toast);
+
+  setTimeout(() => toast.remove(), 3000);
+}
+
 // Função principal de conversão
 async function converter() {
   const valor = parseFloat(campoValor.value);
   const origem = seletorOrigem.value;
   const destino = seletorDestino.value;
   if (isNaN(valor) || valor <= 0) {
-    alert('Digite um valor maior que zero.');
+    mostrarToast('Digite um valor maior que zero.');
     return;
   }
   if (origem === destino) {
     // medida extra de segurança
-    alert('Escolha moedas diferentes para converter.');
+    mostrarToast('Escolha moedas diferentes para converter.');
     return;
   }
 
