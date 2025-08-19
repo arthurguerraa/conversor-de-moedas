@@ -18,7 +18,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   background-color: var(--cor-secundaria);
   padding: 20px;
   border-radius: 8px;
@@ -154,14 +154,15 @@ button:disabled {
 /* layout row para selects + swap */
 .selects-row {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 8px;
 }
 
 /* botão de swap */
 .swap-btn {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 8px;
   border: none;
   background: var(--cor-escura);
@@ -188,7 +189,8 @@ button:disabled {
   position: absolute;
   right: 8px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-20%);
+  transform: translateX(33%);
   border: none;
   background: rgba(0,0,0,0.06);
   width: 36px;
