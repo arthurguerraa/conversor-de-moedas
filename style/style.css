@@ -7,6 +7,10 @@
   --cor-alternativa: #466273;
 }
 
+/* Reset / base */
+* { box-sizing: border-box; }
+
+/* Layout geral */
 body {
   font-family: "Inter", sans-serif;
   display: flex;
@@ -31,6 +35,7 @@ h1 {
   margin-bottom: 16px;
 }
 
+/* botão modo */
 .botao-modo {
   position: absolute;
   top: 12px;
@@ -49,7 +54,6 @@ h1 {
   backdrop-filter: blur(4px);
   transition: background 200ms ease, transform 120ms ease;
 }
-
 .botao-modo:hover { transform: translateY(-2px); }
 .botao-modo:active { transform: translateY(0); }
 .botao-modo:focus {
@@ -57,22 +61,18 @@ h1 {
   outline-offset: 2px;
 }
 
-/* Tema escuro: sobrescreve as variáveis usando as cores já definidas */
+/* Tema escuro: sobrescreve variáveis */
 body.dark-mode {
-  --cor-principal: var(--cor-escura);      /* background geral passa a cor escura */
-  --cor-secundaria: var(--cor-alternativa);/* container usa cor-alternativa */
-  color: #f5f7fa;                          /* texto claro */
+  --cor-principal: var(--cor-escura);
+  --cor-secundaria: var(--cor-alternativa);
+  color: #f5f7fa;
 }
-
-/* Ajustes específicos no modo escuro (opcional) */
 body.dark-mode .container {
   box-shadow: 0 6px 18px rgba(10, 10, 10, 0.45);
 }
+body.dark-mode button { color: #fff; }
 
-body.dark-mode button {
-  color: #fff;
-}
-
+/* Campos e ações */
 .campo,
 .acoes {
   display: flex;
@@ -81,14 +81,18 @@ body.dark-mode button {
   margin-bottom: 16px;
 }
 
+/* Inputs/selects padrão */
 select,
 input[type="number"] {
   padding: 8px;
   font-size: 16px;
   border: 1px solid var(--cor-principal);
   border-radius: 4px;
+  background: white;
+  color: black;
 }
 
+/* Botões globais */
 button {
   padding: 10px;
   font-size: 16px;
@@ -98,12 +102,12 @@ button {
   color: white;
   cursor: pointer;
 }
-
 button:disabled {
   background: var(--cor-principal);
   cursor: not-allowed;
 }
 
+/* Spinner */
 .spinner {
   display: none;
   width: 24px;
@@ -114,36 +118,31 @@ button:disabled {
   animation: girar 1s linear infinite;
   margin: 0 auto;
 }
+@keyframes girar { to { transform: rotate(360deg); } }
 
-@keyframes girar {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
+/* Resultado e histórico */
 .resultado {
   text-align: center;
   font-weight: bold;
   font-size: 18px;
   margin-bottom: 16px;
+  position: relative;
+  padding-right: 48px; /* espaço para o botão copiar */
 }
 
 .historico {
   margin-top: 20px;
 }
-
 .historico h2 {
   font-size: 16px;
   margin-bottom: 8px;
 }
-
 .historico ul {
   list-style: none;
   padding: 0;
   max-height: 200px;
   overflow-y: auto;
 }
-
 .historico li {
   padding: 6px;
   border-bottom: 1px solid var(--cor-principal);
@@ -151,18 +150,42 @@ button:disabled {
   font-weight: 400;
 }
 
-/* layout row para selects + swap */
+/* ---------- SELECTS ROW (corrigido) ---------- */
+/* container flex que agrupa seletor-origem, swap e seletor-destino */
 .selects-row {
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 8px;
+  align-items: center;
+  justify-content: center;
+  min-width: 0; /* muito importante: permite que os filhos encolham */
 }
 
-/* botão de swap */
+/* aplicar min-width:0 e box-sizing aos filhos diretos para evitar overflow */
+.selects-row > * {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* selects: dividir espaço, permitir shrink e encolher abaixo do conteúdo */
+#seletor-origem,
+#seletor-destino {
+  flex: 1 1 0;   /* grow:1, shrink:1, base:0 */
+  min-width: 0;  /* permite encolher mesmo com texto longo */
+  max-width: 100%;
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: black;
+  background: white;
+}
+
+/* botão swap: tamanho fixo, não empurra os selects */
 .swap-btn {
-  width: 36px;
-  height: 36px;
+  flex: 0 0 40px; /* não cresce, não encolhe, largura fixa */
+  width: 40px;
+  height: 40px;
   border-radius: 8px;
   border: none;
   background: var(--cor-escura);
@@ -174,23 +197,12 @@ button:disabled {
   font-size: 18px;
 }
 
-/* resultado: deixa espaço para o botão copiar */
-.resultado {
-  text-align: center;
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 16px;
-  position: relative;
-  padding-right: 48px; /* espaço para o botão copiar */
-}
-
-/* botão copiar (posicionado à direita dentro do box resultado) */
+/* copiar resultado (botão) */
 .copy-btn {
   position: absolute;
   right: 8px;
   top: 50%;
-  transform: translateY(-20%);
-  transform: translateX(33%);
+  transform: translateY(-50%) translateX(12%);
   border: none;
   background: rgba(0,0,0,0.06);
   width: 36px;
@@ -202,25 +214,12 @@ button:disabled {
   justify-content: center;
   font-size: 16px;
 }
-
-/* estilo de estado disabled do botão copiar */
 .copy-btn[disabled] {
   opacity: 0.45;
   cursor: not-allowed;
 }
 
-/* responsividade: em telas pequenas empilha selects */
-@media (max-width: 420px) {
-  .selects-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .swap-btn {
-    align-self: center;
-  }
-}
-
-/* Toasts (mensagens amigáveis) */
+/* Toasts */
 #toast-container {
   position: fixed;
   bottom: 16px;
@@ -230,7 +229,6 @@ button:disabled {
   gap: 8px;
   z-index: 9999;
 }
-
 .toast {
   background: var(--cor-escura);
   color: #fff;
@@ -242,17 +240,36 @@ button:disabled {
   transform: translateY(20px);
   animation: slideIn 0.3s forwards, fadeOut 0.3s 2.7s forwards;
 }
+@keyframes slideIn { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeOut { to { opacity: 0; transform: translateY(20px); } }
 
-@keyframes slideIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+/* ---------- RESPONSIVIDADE ---------- */
+/* telas pequenas: empilha selects e faz eles ocuparem 100% */
+@media (max-width: 420px) {
+  .selects-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .swap-btn {
+    align-self: center;
+    flex: 0 0 auto;
+    width: 40px;
+  }
+
+  #seletor-origem,
+  #seletor-destino {
+    width: 100%;
+    flex: 0 0 auto; /* cada select ocupa largura total */
+    font-size: 14px;
   }
 }
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    transform: translateY(20px);
+
+/* breakpoint intermediário: mantém lado-a-lado, mas ajusta o tamanho das fontes se necessário */
+@media (max-width: 600px) {
+  #seletor-origem,
+  #seletor-destino {
+    font-size: 15px;
   }
 }
-
