@@ -1,0 +1,73 @@
+/* Layout & form elements */
+.campo,
+.acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+/* Inputs/selects padrão */
+select,
+input[type="number"] {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid var(--cor-principal);
+  border-radius: 4px;
+  background: white;
+  color: black;
+  width: 100%;
+}
+
+/* ---------- SELECTS ROW ---------- */
+.selects-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+.selects-row > * { min-width: 0; box-sizing: border-box; }
+
+#seletor-origem,
+#seletor-destino {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: black;
+  background: white;
+}
+
+/* Responsividade */
+@media (max-width: 420px) {
+  .selects-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .swap-btn {
+    align-self: center;
+    flex: 0 0 auto;
+    width: 40px;
+  }
+
+  #seletor-origem,
+  #seletor-destino {
+    width: 100%;
+    flex: 0 0 auto;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  #seletor-origem,
+  #seletor-destino {
+    font-size: 15px;
+  }
+}

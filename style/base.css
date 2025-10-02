@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root{
+  --cor-principal: #C9E4CA;
+  --cor-secundaria: #87BBA2;
+  --cor-escura: #364958;
+  --cor-alternativa: #466273;
+}
+
+/* Reset / base */
+*{ box-sizing: border-box; }
+
+/* Layout geral */
+body {
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--cor-principal);
+  margin: 0;
+}
+.container { width: 100%; max-width: 500px; background-color: var(--cor-secundaria); padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); position: relative; }
+h1 { text-align: center; margin-bottom: 16px; }

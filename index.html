@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style/style.css">
-  <link rel="shortcut icon" href="imagens/favicon.png" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style/base.css" />
+  <link rel="stylesheet" href="style/layout.css" />
+  <link rel="stylesheet" href="style/components.css" />
+  <link rel="stylesheet" href="style/theme.css" />
+  <link rel="shortcut icon" href="imagens/favicon.png" type="image/x-icon" />
   <title>Conversor de Moedas</title>
 </head>
-<div id="toast-container"></div>
 <body>
+  <div id="toast-container" aria-hidden="true"></div>
+
   <div class="container">
     <h1>Conversor de Moedas</h1>
     <button id="botao-modo" class="botao-modo" aria-label="Alternar modo escuro" title="Modo escuro">🌙</button>
@@ -17,7 +21,7 @@
       <input type="number" id="campo-valor" placeholder="Valor a converter" />
 
       <div class="selects-row">
-        <select id="seletor-origem">
+        <select id="seletor-origem" aria-label="Moeda de origem">
           <option value="USD">Dólar (USD)</option>
           <option value="EUR">Euro (EUR)</option>
           <option value="BRL">Real (BRL)</option>
@@ -27,7 +31,7 @@
 
         <button id="swap-btn" class="swap-btn" aria-label="Trocar moedas" title="Trocar">⇄</button>
 
-        <select id="seletor-destino">
+        <select id="seletor-destino" aria-label="Moeda de destino">
           <option value="BRL">Real (BRL)</option>
           <option value="USD">Dólar (USD)</option>
           <option value="EUR">Euro (EUR)</option>
@@ -39,10 +43,9 @@
 
     <div class="acoes">
       <button id="botao-converter">Converter</button>
-      <div class="spinner" id="spinner"></div>
+      <div class="spinner" id="spinner" aria-hidden="true"></div>
     </div>
 
-    <!-- resultado agora tem um span para o texto e um botão de copiar separado -->
     <div class="resultado" id="resultado" aria-live="polite">
       <span id="resultado-text"></span>
       <button id="copy-btn" class="copy-btn" title="Copiar resultado" aria-label="Copiar resultado" disabled>📋</button>
@@ -50,10 +53,10 @@
 
     <div class="historico">
       <h2>Últimas conversões</h2>
-      <ul id="lista-historico"></ul>
+      <ul id="lista-historico" aria-live="polite"></ul>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script type="module" src="script/main.js"></script>
 </body>
 </html>
