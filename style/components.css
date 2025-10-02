@@ -1,0 +1,82 @@
+/* Buttons and controls */
+button {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--cor-escura);
+  color: white;
+  cursor: pointer;
+}
+button:disabled { background: var(--cor-principal); cursor: not-allowed; }
+
+/* Spinner */
+.spinner {
+  display: none;
+  width: 24px;
+  height: 24px;
+  border: 4px solid var(--cor-principal);
+  border-top-color: var(--cor-secundaria);
+  border-radius: 50%;
+  animation: girar 1s linear infinite;
+  margin: 0 auto;
+}
+@keyframes girar { to { transform: rotate(360deg); } }
+
+/* Resultado e histórico */
+.resultado {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 16px;
+  position: relative;
+  padding-right: 48px;
+}
+
+.historico { margin-top: 20px; }
+.historico h2 { font-size: 16px; margin-bottom: 8px; }
+.historico ul { list-style: none; padding: 0; max-height: 200px; overflow-y: auto; }
+.historico li { padding: 6px; border-bottom: 1px solid var(--cor-principal); font-size: 14px; font-weight: 400; }
+
+/* copy button */
+.copy-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-30%) translateX(12%);
+  border: none;
+  background: rgba(0,0,0,0.06);
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.copy-btn[disabled] { opacity: 0.45; cursor: not-allowed; }
+
+/* Toasts */
+#toast-container {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 9999;
+}
+.toast {
+  background: var(--cor-escura);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  font-size: 14px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideIn 0.3s forwards, fadeOut 0.3s 2.7s forwards;
+}
+@keyframes slideIn { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeOut { to { opacity: 0; transform: translateY(20px); } }
